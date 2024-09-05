@@ -1,9 +1,10 @@
 // Diana Isabel Perez Hernandez 
-var maximo, video , reproducir, barra, progreso, silenciar, volumen,
-    bucle, tiempoActual, tracks, select;
+var maximo, video, reproducir, barra, progreso, silenciar, volumen,
+    bucle, tiempoActual, tracks, select, logo;
 
 function iniciar() {
-    maximo = 365; video = document.getElementById("video");
+    maximo = 365; 
+    video = document.getElementById("video");
     reproducir = document.getElementById("reproducir");
     barra = document.getElementById("barra");
     progreso = document.getElementById("progreso");
@@ -11,10 +12,16 @@ function iniciar() {
     volumen = document.getElementById("volumen");
     tiempoActual = document.getElementById("tiempoAct");
     
+    // Crear una instancia de la clase Logo
+    logo = new Logo("panda");
+
     reproducir.addEventListener("click", presionar);
     silenciar.addEventListener("click", sonido);
     barra.addEventListener("click", mover);
     volumen.addEventListener("change", nivel);
+
+    // Dibujar el panda inicialmente
+    logo.drawPanda(colors1);
 }
 
 function presionar() {
@@ -22,10 +29,16 @@ function presionar() {
         video.pause();
         reproducir.value = ">";
         clearInterval(bucle);
+        
+        // Cambiar el panda a su color original cuando se pausa el video
+        logo.drawPanda(colors1);
     } else {
         video.play();
         reproducir.value = "||";
         bucle = setInterval(estado, 1000);
+        
+        // Cambiar el color del panda cuando se reproduce el video
+        logo.drawPanda(colors2);
     }
 }
 
@@ -41,11 +54,6 @@ function estado() {
         tiempoActual.textContent = "0";
     }
 }
-
-/**
- * Maneja el evento de clic del mouse.
- * @param {MouseEvent} evento - El objeto del evento del mouse.
- */
 
 function mover(evento) {
     if (!video.paused && !video.ended) {
@@ -74,18 +82,17 @@ function sonido() {
 function nivel() {
     video.volume = volumen.value;
 }
+
 // Se agrega el listener para ejecutar la función iniciar al cargar la página
 window.addEventListener("load", iniciar);
-
 
 /* Logo en Canvas */
 class Logo {
     constructor(panda) {
-        // Obtiene el contexto 2D del elemento canvas
-        this.canvas = document.getElementById(panda).getContext("2d");
+        this.canvasElement = document.getElementById(panda);
+        this.canvas = this.canvasElement.getContext("2d");
     }
 
-    // Método para dibujar un círculo con degradado
     drawCircle(x, y, radius, color1, color2) {
         const gradient = this.canvas.createRadialGradient(x, y, radius / 2, x, y, radius);
         gradient.addColorStop(0, color1);
@@ -96,34 +103,68 @@ class Logo {
         this.canvas.fillStyle = gradient;
         this.canvas.fill();
     }
+
+    clearCanvas() {
+        this.canvas.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
+    }
+
+    drawPanda(colors) {
+        this.clearCanvas();
+        this.drawCircle(200, 200, 150, colors.background, colors.background); 
+
+        // Cabeza
+        this.drawCircle(200, 200, 100, colors.head1, colors.head2);
+
+        // Ojos
+        this.drawCircle(160, 170, 30, colors.eyes1, colors.eyes2);
+        this.drawCircle(240, 170, 30, colors.eyes1, colors.eyes2);
+
+        // Pupilas
+        this.drawCircle(160, 170, 10, colors.pupils1, colors.pupils2);
+        this.drawCircle(240, 170, 10, colors.pupils1, colors.pupils2);
+
+        // Nariz
+        this.drawCircle(200, 220, 20, colors.nose1, colors.nose2);
+
+        // Orejas
+        this.drawCircle(120, 100, 50, colors.ears1, colors.ears2);
+        this.drawCircle(280, 100, 50, colors.ears1, colors.ears2);
+
+        // Mejillas
+        this.drawCircle(150, 240, 15, colors.cheeks1, colors.cheeks2);
+        this.drawCircle(250, 240, 15, colors.cheeks1, colors.cheeks2);
+    }
 }
 
-// Crear una instancia de la clase y dibujar el logo
-const logo = new Logo("panda");
+const colors1 = {
+    background: '#800080',
+    head1: '#ffffff',
+    head2: '#d3d3d3',
+    eyes1: '#000000',
+    eyes2: '#333333',
+    pupils1: '#ffffff',
+    pupils2: '#bbbbbb',
+    nose1: '#000000',
+    nose2: '#333333',
+    ears1: '#000000',
+    ears2: '#333333',
+    cheeks1: '#ff9999',
+    cheeks2: '#ffcccc'
+};
 
-// Dibuja el círculo morado de fondo
-logo.drawCircle(200, 200, 150, '#800080', '#800080'); 
+const colors2 = {
+    background: '#004080',
+    head1: '#ffccff',
+    head2: '#ff99ff',
+    eyes1: '#0000ff',
+    eyes2: '#3333cc',
+    pupils1: '#ffffff',
+    pupils2: '#bbbbbb',
+    nose1: '#0000ff',
+    nose2: '#3333cc',
+    ears1: '#0000ff',
+    ears2: '#3333cc',
+    cheeks1: '#ff99cc',
+    cheeks2: '#ffccff'
+};
 
-// Dibuja el panda encima del círculo morado
-
-// Cabeza
-logo.drawCircle(200, 200, 100, '#ffffff', '#d3d3d3');
-
-// Ojos
-logo.drawCircle(160, 170, 30, '#000000', '#333333');
-logo.drawCircle(240, 170, 30, '#000000', '#333333');
-
-// Pupilas
-logo.drawCircle(160, 170, 10, '#ffffff', '#bbbbbb');
-logo.drawCircle(240, 170, 10, '#ffffff', '#bbbbbb');
-
-// Nariz
-logo.drawCircle(200, 220, 20, '#000000', '#333333');
-
-// Orejas
-logo.drawCircle(120, 100, 50, '#000000', '#333333');
-logo.drawCircle(280, 100, 50, '#000000', '#333333');
-
-// Mejillas
-logo.drawCircle(150, 240, 15, '#ff9999', '#ffcccc');
-logo.drawCircle(250, 240, 15, '#ff9999', '#ffcccc');
