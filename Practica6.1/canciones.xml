@@ -1,0 +1,72 @@
+<albums>
+    <album>
+        <artist>The Beatles</artist>
+        <title>Abbey Road</title>
+        <songs>17</songs>
+        <year>1969</year>
+        <genre>Rock</genre>
+    </album>
+    <album>
+        <artist>Michael Jackson</artist>
+        <title>Thriller</title>
+        <songs>9</songs>
+        <year>1982</year>
+        <genre>Pop</genre>
+    </album>
+    <album>
+        <artist>Nirvana</artist>
+        <title>Nevermind</title>
+        <songs>12</songs>
+        <year>1991</year>
+        <genre>Grunge</genre>
+    </album>
+    <album>
+        <artist>Adele</artist>
+        <title>21</title>
+        <songs>11</songs>
+        <year>2011</year>
+        <genre>Pop</genre>
+    </album>
+    <album>
+        <artist>Sam Smith</artist>
+        <title>Gloria</title>
+        <songs>13</songs>
+        <year>2023</year>
+        <genre>Pop</genre>
+    </album>
+    <album>
+        <artist>Bob Marley</artist>
+        <title>Legend</title>
+        <songs>16</songs>
+        <year>1984</year>
+        <genre>Reggae</genre>
+    </album>
+    <album>
+        <artist>Queen</artist>
+        <title>A Night at the Opera</title>
+        <songs>12</songs>
+        <year>1975</year>
+        <genre>Rock</genre>
+    </album>
+    <album>
+        <artist>Lady Gaga</artist>
+        <title>The Fame Monster</title>
+        <songs>8</songs>
+        <year>2009</year>
+        <genre>Pop</genre>
+    </album>
+    <album>
+        <artist>Evanescence</artist>
+        <title>Fallen</title>
+        <songs>10</songs>
+        <year>2003</year>
+        <genre>Metal alternativo</genre>
+    </album>
+    <album>
+        <artist>Taylor Swift</artist>
+        <title>1989</title>
+        <songs>13</songs>
+        <year>2014</year>
+        <genre>Pop</genre>
+    </album>
+</albums>
